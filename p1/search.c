@@ -4,6 +4,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<unistd.h>
+
 struct node
 {
 	char * fileName;
@@ -33,12 +35,38 @@ int main(int argc, char** argv)
 	}//*/
 		
 	FILE * outStream;
+	//char* outFileName;
 	if(inputNumber == argc - 4)
 	{
-		outStream = fopen(argv[3+inputNumber],"w");
+		char* outFileName = argv[3+inputNumber]; 
+		//outStream = fopen(outFileName,"w");
+
+		//fclose(outStream);
+		if(access(outFileName,F_OK)!=-1)
+		{
+			unsigned int j;
+			for(j = 3; j < 3+inputNumber; ++j)
+			{
+				char* inFileName = argv[j];
+				char * ptrOut, * ptrIn;
+				if(access(inFileName,F_OK) != -1)
+				{
+					ptrOut = realpath(outFileName,NULL);
+					ptrIn = realpath(inFileName,NULL);
+					//printf("Here %s\n",prtOut);
+					if(strcmp(ptrOut,ptrIn) == 0)
+					{
+						fprintf(stderr,"Input and output file must differ\n");
+						exit(1);
+					}
+				}
+			
+			}
+		}
+		outStream = fopen(outFileName,"w");
 		if(outStream == NULL)
 		{
-			fprintf(stderr,"Error: Cannot open file '%s'\n",argv[3+inputNumber]);
+			fprintf(stderr,"Error: Cannot open file '%s'\n",outFileName);
 			exit(1);
 		}
 	}
@@ -46,11 +74,17 @@ int main(int argc, char** argv)
 	{
 		outStream = stdout;
 	}
+	
 	char * keyWord = argv[2];
 	int keyWordLength = strlen(keyWord);	
 	
 	//Head of the list
 	struct node * head = (struct node *) malloc( sizeof(struct node) );
+	if(head == NULL)
+	{
+		fprintf(stderr,"Malloc failed\n");
+		exit(1);
+	}
 	head-> next = NULL;
 	struct node * tail;
 	tail = head;
@@ -74,13 +108,13 @@ int main(int argc, char** argv)
 		fileBuffer = (char *) malloc(sizeof(char) * fileSize);
 		if(fileBuffer == NULL)
 		{
-			fprintf(stderr, "Malloc failed");
+			fprintf(stderr, "Malloc failed\n");
 			exit(1);	
 		}
 		size_t result = fread(fileBuffer,1,fileSize,fp);
 		if(result != fileSize)
 		{
-			fprintf(stderr,"Reading error");
+			fprintf(stderr,"Reading error\n");
 			exit(1);
 		}
 		char * temp = strstr(fileBuffer,keyWord);
@@ -97,6 +131,11 @@ int main(int argc, char** argv)
 		tail->fileName = inputFileName;
 		tail->occurances = count;
 		tail->next = (struct node *) malloc(sizeof(struct node));
+		if(tail->next == NULL)
+		{
+			fprintf(stderr,"Malloc failed\n");
+			exit(1);
+		}
 		tail = tail->next;
 		tail->next = NULL;
 		fclose(fp);
