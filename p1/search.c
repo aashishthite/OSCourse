@@ -105,7 +105,7 @@ int main(int argc, char** argv)
 		fseek(fp, 0, SEEK_END);
 		long long int fileSize = ftell(fp);
 		fseek(fp, 0, SEEK_SET);	
-		fileBuffer = (char *) malloc(sizeof(char) * fileSize);
+		fileBuffer = (char *) malloc(sizeof(char) * fileSize + 1);
 		if(fileBuffer == NULL)
 		{
 			fprintf(stderr, "Malloc failed\n");
@@ -117,6 +117,7 @@ int main(int argc, char** argv)
 			fprintf(stderr,"Reading error\n");
 			exit(1);
 		}
+		fileBuffer[fileSize]='\0';
 		char * temp = strstr(fileBuffer,keyWord);
 		int count=0;
 		while(temp != NULL)

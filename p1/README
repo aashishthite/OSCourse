@@ -1,0 +1,11 @@
+Author: Aashish Thite(thite@wisc.edu)
+
+Notes about my code:
+
+-Passed all given test cases.
+-Used a linked list to store fileNames and keyWord occurances.
+-Used access() function to check if the file exists before the use of realpath function.
+-Read the complete file into the memory.
+-Used strstr() for search.
+-Wrote my own sorting algorithm
+
