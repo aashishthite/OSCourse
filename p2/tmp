@@ -1,0 +1,4 @@
+ls -al| head -10
+
+ls -al| head -10
+

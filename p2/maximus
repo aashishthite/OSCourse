@@ -1,0 +1,12 @@
+0  8240 13571 13569  20   0 103248   812 signal T    pts/1      0:00 grep zombie
+0  8240 14120 14108  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14150 14145  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14612 14590  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14780 14776  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14819 14815  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14841 14837  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14911 14909  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14934 14932  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 14961 14959  20   0 103252   848 signal T    pts/1      0:00 grep zombie
+0  8240 15023 15021  20   0 103252   852 signal T    pts/1      0:00 grep zombie
+0  8240 15473 15437  20   0 103252   848 pipe_w S+   pts/1      0:00 grep zombie

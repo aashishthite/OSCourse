@@ -1,0 +1,2 @@
+ps axl|grep zombie
+ls -l|grep Feb| head -10 > helloFile
